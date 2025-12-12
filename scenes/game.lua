@@ -311,6 +311,46 @@ function Scene:drawScore()
         love.graphics.draw(starImg, x, y, 0, starWidth / starImg:getWidth(), starHeight / starImg:getHeight())
     end
     
+    -- Draw instructions in the center between the stars
+    love.graphics.setFont(self.game.fonts.smallFont)
+    love.graphics.setColor(220/255, 207/255, 185/255, 1)
+    
+    local instructionY = margin + 10
+    local iconSize = 24
+    local centerX = screenWidth / 2
+    
+    if gameOver then
+        local buttonYScale = iconSize / self.game.images.buttonB:getHeight()
+        local buttonYWidth = self.game.images.buttonB:getWidth() * buttonYScale
+        local backTextWidth = self.game.fonts.smallFont:getWidth("Back")
+        local totalWidth = buttonYWidth + 5 + backTextWidth
+        local startX = centerX - totalWidth / 2
+        
+        love.graphics.draw(self.game.images.buttonB, startX, instructionY, 0, buttonYScale)
+        love.graphics.print("Back", startX + buttonYWidth + 5, instructionY + (iconSize - self.game.fonts.smallFont:getHeight())/2)
+    else
+        local leftStickScale = iconSize / self.game.images.leftStick:getHeight()
+        local buttonAScale = iconSize / self.game.images.buttonA:getHeight()
+        local spacing = 60
+        
+        local leftStickWidth = self.game.images.leftStick:getWidth() * leftStickScale
+        local moveTextWidth = self.game.fonts.smallFont:getWidth("Move")
+        local leftInstructionWidth = leftStickWidth + 5 + moveTextWidth
+        
+        local buttonAWidth = self.game.images.buttonA:getWidth() * buttonAScale
+        local changeTextWidth = self.game.fonts.smallFont:getWidth("Change")
+        local rightInstructionWidth = buttonAWidth + 5 + changeTextWidth
+        
+        local leftInstructionX = centerX - spacing/2 - leftInstructionWidth
+        local rightInstructionX = centerX + spacing/2
+        
+        love.graphics.draw(self.game.images.leftStick, leftInstructionX, instructionY, 0, leftStickScale)
+        love.graphics.print("Move", leftInstructionX + leftStickWidth + 5, instructionY + (iconSize - self.game.fonts.smallFont:getHeight())/2)
+        
+        love.graphics.draw(self.game.images.buttonA, rightInstructionX, instructionY, 0, buttonAScale)
+        love.graphics.print("Change", rightInstructionX + buttonAWidth + 5, instructionY + (iconSize - self.game.fonts.smallFont:getHeight())/2)
+    end
+    
     love.graphics.setColor(1, 1, 1, 1)
 end
 

@@ -29,6 +29,8 @@ local game = {
 
     -- assets
     images = {},
+    fonts = {
+    },
 
     -- constants
     constants = {
@@ -113,12 +115,16 @@ function love.load()
     game.images.mouth4 = love.graphics.newImage("assets/images/mouth4.png")
     game.images.star = love.graphics.newImage("assets/images/star.png")
     game.images.buttonA = love.graphics.newImage("assets/images/buttons_a.png")
+    game.images.buttonB = love.graphics.newImage("assets/images/buttons_b.png")
     game.images.buttonY = love.graphics.newImage("assets/images/buttons_y.png")
     game.images.leftStick = love.graphics.newImage("assets/images/left_stick.png")
     game.images.crown1 = love.graphics.newImage("assets/images/crown1.png")
     game.images.crown2 = love.graphics.newImage("assets/images/crown2.png")
     game.images.crown3 = love.graphics.newImage("assets/images/crown3.png")
     game.images.crown4 = love.graphics.newImage("assets/images/crown4.png")
+
+    game.fonts.titleFont = love.graphics.newFont("assets/font/Arial Black.ttf", 48)
+    game.fonts.smallFont = love.graphics.newFont("assets/font/Arial Black.ttf", 16)
 
     game.scenes.title = TitleScene.new(game)
     game.scenes.game = GameScene.new(game)

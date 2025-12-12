@@ -5,8 +5,6 @@ function Scene.new(game)
     local self = setmetatable({}, Scene)
 
     self.game = game
-    self.titleFont = love.graphics.newFont("assets/font/Arial Black.ttf", 48)
-    self.smallFont = love.graphics.newFont("assets/font/Arial Black.ttf", 16)
     self.flashingPlayers = {}
     self.bottomScreenMessage = ""
     self.startGameTimer = nil
@@ -112,13 +110,13 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
-    love.graphics.setFont(self.titleFont)
+    love.graphics.setFont(self.game.fonts.titleFont)
     love.graphics.setColor(0, 0, 0, 1)
     
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
     local text = "pong."
-    local textWidth = self.titleFont:getWidth(text)
+    local textWidth = self.game.fonts.titleFont:getWidth(text)
     
     local x = (screenWidth - textWidth) / 2
     local y = 100
@@ -129,12 +127,12 @@ function Scene:draw()
     love.graphics.circle("fill", self.teamCircleLeftX, self.teamCircleY, self.teamCircleRadius)
     love.graphics.circle("fill", self.teamCircleRightX, self.teamCircleY, self.teamCircleRadius)
 
-    love.graphics.setFont(self.titleFont)
+    love.graphics.setFont(self.game.fonts.titleFont)
     
     local leftTeamText = "left team"
     local rightTeamText = "right team"
-    local leftTeamWidth = self.titleFont:getWidth(leftTeamText)
-    local rightTeamWidth = self.titleFont:getWidth(rightTeamText)
+    local leftTeamWidth = self.game.fonts.titleFont:getWidth(leftTeamText)
+    local rightTeamWidth = self.game.fonts.titleFont:getWidth(rightTeamText)
     
     local textY = self.teamCircleY + self.teamCircleRadius + 20
     love.graphics.print(leftTeamText, self.teamCircleLeftX - leftTeamWidth / 2, textY)
@@ -156,7 +154,7 @@ function Scene:draw()
     end
 
     if self.bottomScreenMessage ~= "" then
-        love.graphics.setFont(self.titleFont)
+        love.graphics.setFont(self.game.fonts.titleFont)
         love.graphics.setColor(220/255, 207/255, 185/255, 1)
         
         local maxWidth = screenWidth * 0.6
@@ -167,7 +165,7 @@ function Scene:draw()
     end
 
     love.graphics.setColor(220/255, 207/255, 185/255, 1)
-    love.graphics.setFont(self.smallFont)
+    love.graphics.setFont(self.game.fonts.smallFont)
     
     local textX = screenWidth - 150
     local controlsY = screenHeight - 120
