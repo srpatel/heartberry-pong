@@ -1,5 +1,6 @@
 {
   "name": "Pong",
+  "author": "sunil",
   "exec": "love .",
   "thumbnail": "thumbnail.png",
   "description": "A simple Pong game."
