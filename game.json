@@ -1,7 +1,8 @@
 {
-  "name": "Pong",
+  "name": "pong.",
+  "version": "1.0.0",
   "author": "sunil",
   "exec": "love .",
   "thumbnail": "thumbnail.png",
-  "description": "A simple Pong game."
+  "description": "Pong, with a twist. In your downtime, go and collect some extra stars."
 }
