@@ -98,9 +98,11 @@ local game = {
 
 ---------------------------
 
-function love.load()
-    love.window.setFullscreen(true)
-    love.mouse.setVisible(false)
+function love.load(arg)
+    if arg[1] == '--heartberry' then
+        love.window.setFullscreen(true)
+        love.mouse.setVisible(false)
+    end
     
     local screenWidth = love.graphics.getWidth()
     game.constants.CIRCLE_RADIUS = math.max(30, screenWidth * 0.026)
