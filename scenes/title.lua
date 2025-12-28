@@ -216,12 +216,15 @@ function Scene:gamepadpressed(joystick, button, player)
                 self.flashingPlayers[player] = 800
             end
         end
+    elseif button == "b" then
+        if player.mode == "locked" then
+            player.mode = "face"
+        end
     elseif button == "y" then
         player.colour = {math.random(), math.random(), math.random()}
         player.eyes = math.random(1, 4)
         player.mouth = math.random(1, 4)
     end
-
 end
 
 return Scene
