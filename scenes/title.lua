@@ -8,6 +8,7 @@ function Scene.new(game)
     self.flashingPlayers = {}
     self.bottomScreenMessage = ""
     self.startGameTimer = nil
+    self.lastNoiseAt = 0
 
     local screenWidth = love.graphics.getWidth()
     self.teamCircleRadius = screenWidth * 0.12
@@ -99,14 +100,21 @@ function Scene:update(dt)
     end
     
     if self.startGameTimer and self.startGameTimer > 0 then
+        if math.ceil(self.startGameTimer) < self.lastNoiseAt then
+            self.game.sounds.countdown:play()
+            self.lastNoiseAt = math.ceil(self.startGameTimer)
+        end
         self.bottomScreenMessage = "Game starts in " .. math.ceil(self.startGameTimer) .. " seconds!"
         self.startGameTimer = self.startGameTimer - dt
         if self.startGameTimer <= 0 then
             self.game:setScene(self.game.scenes.game)
+            self.game.sounds.start:play()
         end
         return
     end
     self.startGameTimer = 5
+    self.lastNoiseAt = 5
+    self.game.sounds.countdown:play()
 end
 
 function Scene:draw()

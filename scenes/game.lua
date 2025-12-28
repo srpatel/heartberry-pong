@@ -49,6 +49,9 @@ function Scene:update(dt)
 
     if ball.waiting > 0 then
         ball.waiting = ball.waiting - dt
+        if ball.waiting <= 0 then
+            self.game.sounds.bounceWall:play()
+        end
     else
         ball.x = ball.x + ball.vx * ball.speedMultiplier * dt
         ball.y = ball.y + ball.vy * ball.speedMultiplier * dt
@@ -60,9 +63,11 @@ function Scene:update(dt)
             if bounceCount % 4 == 0 then
                 self:addBonusPoint()
             end
+            self.game.sounds.bounceWall:play()
         end
         
         if ball.x - ball.radius <= 0 then
+            self.game.sounds.out:play()
             scores.right = scores.right + 1
             bounceCount = bounceCount + 1
             if bounceCount % 4 == 0 then
@@ -73,6 +78,7 @@ function Scene:update(dt)
                 self:resetBall()
             end
         elseif ball.x + ball.radius >= love.graphics.getWidth() then
+            self.game.sounds.out:play()
             scores.left = scores.left + 1
             bounceCount = bounceCount + 1
             if bounceCount % 4 == 0 then
@@ -117,6 +123,7 @@ function Scene:update(dt)
                 
                 local hitPos = (ball.y - paddle.y) / (paddle.size / 2)
                 ball.vy = ball.vy + hitPos * 100
+                self.game.sounds.bounce:play()
             end
             ::continue::
         end
@@ -152,6 +159,7 @@ function Scene:update(dt)
                     
                     if distance < collisionDistance then
                         table.remove(bonusPoints, i)
+                        self.game.sounds.countdown:play()
                         
                         if player.team == "left" then
                             scores.left = scores.left + 1

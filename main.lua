@@ -29,8 +29,8 @@ local game = {
 
     -- assets
     images = {},
-    fonts = {
-    },
+    fonts = {},
+    sounds = {},
 
     -- constants
     constants = {
@@ -124,6 +124,12 @@ function love.load(arg)
     game.images.crown2 = love.graphics.newImage("assets/images/crown2.png")
     game.images.crown3 = love.graphics.newImage("assets/images/crown3.png")
     game.images.crown4 = love.graphics.newImage("assets/images/crown4.png")
+
+    game.sounds.bounce = love.audio.newSource("assets/sound/bounce.wav", "static")
+    game.sounds.bounceWall = love.audio.newSource("assets/sound/bounce-wall.wav", "static")
+    game.sounds.countdown = love.audio.newSource("assets/sound/countdown.wav", "static")
+    game.sounds.start = love.audio.newSource("assets/sound/start.wav", "static")
+    game.sounds.out = love.audio.newSource("assets/sound/out.wav", "static")
 
     game.fonts.titleFont = love.graphics.newFont("assets/font/Arial Black.ttf", 48)
     game.fonts.smallFont = love.graphics.newFont("assets/font/Arial Black.ttf", 16)
