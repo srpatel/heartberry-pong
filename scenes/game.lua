@@ -244,8 +244,19 @@ function Scene:draw()
             local paddle = self:getPaddleForPlayer(player)
             if paddle then
                 love.graphics.setColor(player.colour)
-                love.graphics.rectangle("fill", paddle.x - 10, paddle.y - paddle.size / 2, 20, paddle.size)
+                love.graphics.rectangle("fill", paddle.x - 10, paddle.y - paddle.size / 2 + 10, 20, paddle.size - 20)
+                love.graphics.circle("fill", paddle.x, paddle.y - paddle.size / 2 + 10, 10)
+                love.graphics.circle("fill", paddle.x, paddle.y + paddle.size / 2 - 10, 10)
                 love.graphics.setColor(1, 1, 1, 1)
+                
+                local faceScale = 0.18
+                local eyeImg = self.game.images["eyes" .. player.eyes]
+                love.graphics.draw(eyeImg, paddle.x - eyeImg:getWidth() / (2 / faceScale), paddle.y - self.game.constants.CIRCLE_RADIUS / 4 - eyeImg:getHeight() / (2 / faceScale), 0, faceScale)
+
+                local mouthImg = self.game.images["mouth" .. player.mouth]
+                local mouthOffsetY = self.game.constants.CIRCLE_RADIUS * 0.2
+
+                love.graphics.draw(mouthImg, paddle.x - mouthImg:getWidth() / (2 / faceScale), paddle.y + mouthOffsetY, 0, faceScale)
             end
         end
     end
